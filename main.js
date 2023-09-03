@@ -299,10 +299,72 @@
 
 //■5-2  click  event.preventDefault() ,  5-3 submit ,  5-4  window  mousewheel
 
+// (function($) {
+//   $(function() {
+//     $(window).on('mousewheel', function (event) {
+//       event.preventDefault();
+//     });
+//   });
+// })(jQuery);
+
+
+//■6-1  load
+
+// (function($) {
+//   $(function() {
+//     function log(text) {
+//       $('#log').append($('<li />').text(text));
+//     }
+
+//     $('img').on('load', function (event) {
+//       // console.log(this, $(this), $(this).eq(0))
+//       // log('imgタグのサイズ：' + $(this).width() + 'x' + $(this).height());
+//       // log('画像のサイズ：' + this.naturalWidth + 'x' + this.natuarlHeight);
+//     });
+//   });
+// })(jQuery);
+
+
+//■6-2  contextmenu
+
+// (function($) {
+//   $(function() {
+//     $(document).on('contextmenu', function (event) {
+//       alert('右クリックは禁止されています！');
+//       event.preventDefault();
+//     });
+//   });
+// })(jQuery);
+
+
+//■6-3  resize
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       const size = $(window).width() + 'x' + $(window).height();
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました。現在のサイズ：' + size));
+//     }
+
+//     $(window).on('resize', function (event) {
+//       logEvent(event);
+//     });
+//   });
+// })(jQuery);
+
+
+//■6-4  beforeunload
+
 (function($) {
   $(function() {
-    $(window).on('mousewheel', function (event) {
-      event.preventDefault();
+    $('#reload').on('click', function () {
+      location.reload();
+    });
+
+    $(window).on('beforeunload', function () {
+      if ($('#input').val()) {
+        return 'まだ保存されていない内容があります。';
+      }
     });
   });
 })(jQuery);
