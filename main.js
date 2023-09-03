@@ -193,32 +193,88 @@
 
 //■3-3
 
+// (function($) {
+//   $(function() {
+//     function move (distance) {
+//       const currentPosition = $('.target').position();
+//       const newStyle = {
+//         top: currentPosition.top + distance.y,
+//         left: currentPosition.left + distance.x,
+//       }
+//       $('.target').css(newStyle);
+//     }
+
+//     $('#input').on('keydown', function (event) {
+//       switch (event.which) {
+//         case 37: // ←
+//           move({ x: -5, y: 0 });
+//           break;
+//         case 38: // ↑
+//           move({ x: 0, y: -5 });
+//           break;
+//         case 39: // →
+//           move({ x: 5, y: 0 });
+//           break;
+//         case 40: // ↓
+//           move({ x: 0, y: 5 });
+//           break;
+//       }
+//     })
+//   });
+// })(jQuery);
+
+
+//■4-1～4-2 focus blur
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+//     }
+
+//     $('form').on('submit', function (event) {
+//       return false;
+//     });
+
+//     $('#input').on('blur', function (event) {
+//       logEvent(event);
+//     });
+//   });
+// })(jQuery);
+
+
+//■4-3 .val() change , 4-4 input
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       const value = $(event.target).val();
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました。現在の値：' + value));
+//     }
+
+//     $('form').on('submit', function (event) {
+//       return false;
+//     });
+
+//     $('#input').on('input', function (event) {
+//       logEvent(event);
+//     });
+//   });
+// })(jQuery);
+
+
+//■4-5 submit
+
 (function($) {
   $(function() {
-    function move (distance) {
-      const currentPosition = $('.target').position();
-      const newStyle = {
-        top: currentPosition.top + distance.y,
-        left: currentPosition.left + distance.x,
-      }
-      $('.target').css(newStyle);
+    function logEvent (event) {
+      const formValue = $('#form').serialize();
+      $('#log').prepend($('<li />').text(event.type + 'が発生しました。フォームの値：' + formValue));
     }
 
-    $('#input').on('keydown', function (event) {
-      switch (event.which) {
-        case 37: // ←
-          move({ x: -5, y: 0 });
-          break;
-        case 38: // ↑
-          move({ x: 0, y: -5 });
-          break;
-        case 39: // →
-          move({ x: 5, y: 0 });
-          break;
-        case 40: // ↓
-          move({ x: 0, y: 5 });
-          break;
-      }
-    })
+    $('#form').on('submit', function (event) {
+      logEvent(event);
+      event.preventDefault();
+    });
   });
 })(jQuery);
