@@ -81,12 +81,62 @@
 
 //■1-6
 
+// (function($) {
+//   $(function() {
+//     $('#button').on('click', function () {
+//       alert('clickされました');
+//     });
+
+//     $('#button').trigger('click');
+//   });
+// })(jQuery);
+
+
+//■2-1
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+//     }
+
+//     $('#button').on('click', function (event) {
+//       logEvent(event);
+//     });
+//   });
+// })(jQuery);
+
+
+//■2-2～2-5
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+//     }
+
+//     $('#button').on('mouseenter', function (event) {
+//       $('#button').addClass('active');
+//       logEvent(event);
+//     });
+//     $('#button').on('mouseleave', function (event) {
+//       $('#button').removeClass('active');
+//       logEvent(event);
+//     });
+//   });
+// })(jQuery);
+
+
+//■2-6～2-7 mousedown mouseup
+
 (function($) {
   $(function() {
-    $('#button').on('click', function () {
-      alert('clickされました');
-    });
+    function logEvent (event) {
+      $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+    }
 
-    $('#button').trigger('click');
+    $('#button').on('mouseup', function (event) {
+      logEvent(event);
+    });
   });
 })(jQuery);
