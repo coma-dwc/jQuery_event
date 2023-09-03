@@ -129,14 +129,96 @@
 
 //■2-6～2-7 mousedown mouseup
 
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+//     }
+
+//     $('#button').on('mouseup', function (event) {
+//       logEvent(event);
+//     });
+//   });
+// })(jQuery);
+
+
+//■3-1
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+//     }
+
+//     $('form').on('submit', function (event) {
+//       return false;
+//     });
+
+//     $('#input').on('keypress', function (event) {
+//       if (event.which === 13) {
+//         logEvent(event);
+//       }
+//     });
+//   });
+// })(jQuery);
+
+
+//■3-2
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event, withKey) {
+//       const key = withKey ? withKey + '+' : ''
+//       $('#log').prepend($('<li />').text(key + event.key + 'が入力されました'));
+//     }
+
+//     $('form').on('submit', function (event) {
+//       return false;
+//     });
+
+//     $('#input').on('keypress', function (event) {
+//       if (event.which === 13 && event.shiftKey && event.altKey) {
+//         logEvent(event, 'shift+alt');
+//       } else if (event.which === 13 && event.shiftKey) {
+//         logEvent(event, 'shift');
+//       } else if (event.which === 13 && event.altKey) {
+//         logEvent(event, 'alt');
+//       } else if (event.which === 13) {
+//         logEvent(event);
+//       }
+//     });
+//   });
+// })(jQuery);
+
+
+//■3-3
+
 (function($) {
   $(function() {
-    function logEvent (event) {
-      $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+    function move (distance) {
+      const currentPosition = $('.target').position();
+      const newStyle = {
+        top: currentPosition.top + distance.y,
+        left: currentPosition.left + distance.x,
+      }
+      $('.target').css(newStyle);
     }
 
-    $('#button').on('mouseup', function (event) {
-      logEvent(event);
-    });
+    $('#input').on('keydown', function (event) {
+      switch (event.which) {
+        case 37: // ←
+          move({ x: -5, y: 0 });
+          break;
+        case 38: // ↑
+          move({ x: 0, y: -5 });
+          break;
+        case 39: // →
+          move({ x: 5, y: 0 });
+          break;
+        case 40: // ↓
+          move({ x: 0, y: 5 });
+          break;
+      }
+    })
   });
 })(jQuery);
