@@ -265,15 +265,43 @@
 
 //■4-5 submit
 
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       const formValue = $('#form').serialize();
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました。フォームの値：' + formValue));
+//     }
+
+//     $('#form').on('submit', function (event) {
+//       logEvent(event);
+//       event.preventDefault();
+//     });
+//   });
+// })(jQuery);
+
+
+//■5-1 off
+
+// (function($) {
+//   $(function() {
+//     function logEvent (event) {
+//       $('#log').prepend($('<li />').text(event.type + 'が発生しました'));
+//     }
+//     function handleClick(event) {
+//       logEvent(event);
+//     }
+
+//     $('#button').on('click', handleClick);
+//     $('#button').off('click', handleClick);
+//   });
+// })(jQuery);
+
+
+//■5-2  click  event.preventDefault() ,  5-3 submit ,  5-4  window  mousewheel
+
 (function($) {
   $(function() {
-    function logEvent (event) {
-      const formValue = $('#form').serialize();
-      $('#log').prepend($('<li />').text(event.type + 'が発生しました。フォームの値：' + formValue));
-    }
-
-    $('#form').on('submit', function (event) {
-      logEvent(event);
+    $(window).on('mousewheel', function (event) {
       event.preventDefault();
     });
   });
